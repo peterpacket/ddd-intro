@@ -1,9 +1,11 @@
 <?php
 
-namespace src;
+namespace src\LeaveManagement\Domain;
 
 class Leave
 {
+    private LeaveId $id;
+
     private Employee $employee;
 
     private LeaveRequestStatus $status;
@@ -13,36 +15,15 @@ class Leave
     public static function requestNew(Employee $employee): self
     {
         $request = new self;
+        $request->id = new LeaveId(uniqid());
         $request->employee = $employee;
         $request->status = LeaveRequestStatus::Pending;
 
         return $request;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public function employeeThatMadeTheRequest(): Employee
+    public function id(): LeaveId
     {
-        return $this->employeeThatMadeTheRequest;
-    }
-
-    public function leaveRequestStatus(): LeaveRequestStatus
-    {
-        return $this->leaveRequestStatus;
-    }
-
-    public function finalisedBy(): ?Manager
-    {
-        return $this->finalisedBy;
+        return $this->id;
     }
 }
